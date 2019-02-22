@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Card from './Card'
 import ActionList from './ActionList';
+import ExpandingContent from './ExpandingContent';
 
 export default class App extends React.Component {
 
@@ -15,9 +16,14 @@ export default class App extends React.Component {
             onPress={() => { }}
           />
           <Text>Open up App.js to start working on your app!</Text>
-          <View style={styles.red}></View>
-          <Card />
-          <View style={{ flexDirection: 'row' }}>
+          {/* <View style={styles.red}></View> */}
+          <View style={{backgroundColor:'lightgrey'}}>
+            <ExpandingContent />
+          </View>
+          <View style={{ backgroundColor: 'lightyellow' }}>
+            <Card />
+          </View>
+          <View style={{ flexDirection: 'row', backgroundColor: 'yellow' }}>
             <ActionList />
             <ActionList o1={true} />
           </View>
