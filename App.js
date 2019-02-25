@@ -1,23 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Animated, Button } from 'react-native';
 import Card from './Card'
 import ActionList from './ActionList';
 import ExpandingContent from './ExpandingContent';
+import AnimatedLine from './AnimatedLine';
+import List from './List'
 
 export default class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = { data: [], list: null };
+    for (let i = 0; i < 200; i++) {
+      this.state.data.push(i)
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ list: this.list })
+  }
 
   render() {
+    const headerHeight = this.state.list ? this.state.list.scrollY.interpolate({
+      inputRange: [0, 100],
+      outputRange: [100, 0],
+      extrapolate: 'clamp',
+    }) : 0;
+    console.log(this.list)
     return (
       <View style={styles.container}>
-        <View>
-          <Button
-            title="ANIM"
-            onPress={() => { }}
+        <View style={{ height: 200 }}>
+          <List
+            onRef={ref => this.list = ref}
           />
+        </View>
+        <Button
+          title="TEST"
+          onPress={() => { console.log(this.list) }}
+        />
+        <AnimatedLine animatedWidth={headerHeight} />
+        <View>
           <Text>Open up App.js to start working on your app!</Text>
           {/* <View style={styles.red}></View> */}
-          <View style={{backgroundColor:'lightgrey'}}>
+          <View style={{ backgroundColor: 'lightgrey' }}>
             <ExpandingContent />
           </View>
           <View style={{ backgroundColor: 'lightyellow' }}>
@@ -27,8 +53,8 @@ export default class App extends React.Component {
             <ActionList />
             <ActionList o1={true} />
           </View>
-        </View>
-      </View>
+        </View >
+      </View >
     );
   }
 }
