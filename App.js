@@ -27,7 +27,6 @@ export default class App extends React.Component {
       outputRange: [100, 0],
       extrapolate: 'clamp',
     }) : 0;
-    console.log(this.list)
     return (
       <View style={styles.container}>
         <View style={{ height: 200 }}>
@@ -39,7 +38,7 @@ export default class App extends React.Component {
           title="TEST"
           onPress={() => { console.log(this.list) }}
         />
-        <AnimatedLine animatedWidth={headerHeight} />
+        <AnimatedLine animatedWidth={headerHeight} yOffset={this.state.list && this.state.list.scrollY} />
         <View>
           <Text>Open up App.js to start working on your app!</Text>
           {/* <View style={styles.red}></View> */}
